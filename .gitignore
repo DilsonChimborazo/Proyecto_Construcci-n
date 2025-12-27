@@ -1,0 +1,62 @@
+# ============================
+# SISTEMA / EDITORES
+# ============================
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.log
+
+# ============================
+# PYTHON / DJANGO (BACKEND)
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+*.sqlite3
+
+# Django migrations cache
+*.bak
+*.swp
+
+# ============================
+# NODE / REACT / VITE (FRONTEND)
+# ============================
+node_modules/
+dist/
+build/
+.vite/
+
+# Package managers
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ============================
+# TESTING / COVERAGE
+# ============================
+.coverage
+htmlcov/
+pytest_cache/
+
+# ============================
+# IDEs
+# ============================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
