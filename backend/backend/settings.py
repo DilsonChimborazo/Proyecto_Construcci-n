@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -129,10 +131,14 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # Autenticación con jwt
 REST_FRAMEWORK = {
-    'DEFAULT_UTENTICATION_CLASSES':(
-        'rest_framework_simplejwt.autentication.JWTautentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
 
 SIMPLE_JWT = {
     # Token valido por una hora
@@ -141,7 +147,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 
     #Formato del header
-    'AUHT_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_TYPES': ('Bearer',),
 
     "USER_ID_FIELD": "cedula_nit",
     "USER_ID_CLAIM": "user_id",

@@ -10,7 +10,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('empresa', 'empresa'),
     )
 
-    cedula_nit = models.BigIntegerField(primary_key=True)
+    cedula_nit = models.BigIntegerField(primary_key=True, unique=True)
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20, blank=True)

@@ -1,6 +1,8 @@
 from rest_framework.serializers import ModelSerializer 
 from accounts.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework.serializers import ModelSerializer
+from accounts.models import User
 
 # Serializador de login
 class LoginSerializer(TokenObtainPairSerializer):
@@ -27,3 +29,17 @@ class RegisterSerializer(ModelSerializer):
         user.is_active = True
         user.save()
         return user
+
+# Datos de usuario
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'cedula_nit',
+            'email',
+            'full_name',
+            'phone',
+            'user_type',
+            'photo',
+        )
+

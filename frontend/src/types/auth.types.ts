@@ -3,22 +3,45 @@ export interface LoginData {
   password: string
 }
 
+export type UserType = 'cliente' | 'empresa'
+
 export interface RegisterData {
-  fullname: string
+  cedula_nit: number
   email: string
+  full_name: string
+  phone: string
+  user_type: UserType
   password: string
 }
+
+export interface MeData{
+  cedula_nit: number
+  email: string
+  full_name: string
+  phone: string
+  user_type: UserType
+  password: string
+}
+
 
 export interface AuthResponse {
   access: string
   refresh: string
 }
 
+
+
 export interface User {
-  email: string
+  cedula_nit: number
+  user_type?: UserType
   full_name?: string
-  user_type?: string
+  email: string
+  phone: string
+  password: string
+  registration_date: Date
 }
+
+
 
 export interface AuthTokens {
   access: string

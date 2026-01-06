@@ -8,12 +8,16 @@ import { login } from '../services/auth.services'
 import type { LoginData } from '../types/auth.types'
 import Register from './Register'
 import { FaGithub, FaFacebookF, FaGoogle } from 'react-icons/fa'
+import { FcGoogle } from 'react-icons/fc'
+import toast from 'react-hot-toast'
+import api from '../api/axios'
+
 
 
 const Login = () => {
   const navigate = useNavigate()
 
-  // Estado para alternar Login / Register (NO TOCADO)
+  // Estado para alternar Login / Register
   const [mode, setMode] = useState<'login' | 'register'>('login')
 
   // React Hook Form
@@ -23,15 +27,20 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginData>()
 
-  // Login mutation (NO TOCADO)
+  // Login mutation 
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: async (data) => {
       localStorage.setItem('access', data.access)
+  // Datos de usuario
+    const res = await api.get('/me/')
+    const user = res.data
+
+    toast.success(`Bienvenido, ${user.full_name}`)
       navigate('/dashboard', { replace: true })
     },
     onError: () => {
-      alert('Credenciales incorrectas')
+      toast.error('Credenciales incorrectas')
     },
   })
 
@@ -231,13 +240,14 @@ const Login = () => {
               <div className="flex-1 h-px bg-gray-300"></div>
             </div> 
             <div className="flex justify-center gap-10 mt-4">
-              <span className="cursor-pointer hover:text-blue-600 transition">
-                Facebook
-              </span>
-
-              <span className="cursor-pointer hover:text-red-500 transition">
-                Google
-              </span>
+              <li className="flex items-center gap-2 mb-2 hover:text-black">
+                <FcGoogle className="text-3xl text-blue-700" />
+                <a href="https://github.com/DilsonChimborazo/Proyecto_Construcci-n"><span>Google</span></a>
+              </li>
+              <li className="flex items-center gap-2 mb-2 hover:text-black">
+                <FaFacebookF className="text-3xl text-blue-700" />
+                <a href="https://github.com/DilsonChimborazo/Proyecto_Construcci-n"><span>Facebook</span></a>
+              </li>
             </div>
           </form>
         )}

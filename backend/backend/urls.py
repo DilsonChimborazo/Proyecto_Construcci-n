@@ -17,8 +17,8 @@ Including another URLconf
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts.api.views import LoginView
 from accounts.api.routers import routerRegister
+from accounts.api.views import LoginView, MeView
 
 # Vistas ya creadas por simpleJWT
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
@@ -31,6 +31,7 @@ urlpatterns = [
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     
     path("api/login/", LoginView.as_view(), name="login"),
+    path('api/me/', MeView.as_view(), name='me'),
     path("api/", include(routerRegister.urls)),
 
 ]
