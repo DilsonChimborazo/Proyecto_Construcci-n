@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [me, setMe] = useState<any>(null)
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login', { replace: true })
+      navigate('/', { replace: true })
     }
   }, [isAuthenticated, navigate])
 

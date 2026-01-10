@@ -18,7 +18,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts.api.routers import routerRegister
+from accounts.api.views import EmpresasView
 from accounts.api.views import LoginView, MeView
+from Product.api.routers import routerProduct
+from Order.api.routers import routerOrder
 
 # Vistas ya creadas por simpleJWT
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
@@ -33,6 +36,9 @@ urlpatterns = [
     path("api/login/", LoginView.as_view(), name="login"),
     path('api/me/', MeView.as_view(), name='me'),
     path("api/", include(routerRegister.urls)),
+    path("api/empresas/", EmpresasView.as_view(), name="empresas"),
+    path("api/", include(routerProduct.urls)),
+    path("api/", include(routerOrder.urls)),
 
 ]
 

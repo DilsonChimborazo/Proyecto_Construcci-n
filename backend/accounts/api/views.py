@@ -18,11 +18,18 @@ class RegisterViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
-    http_method_names = ["post"]
+    http_method_names = ["post","get"]
 
 class MeView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+    
+class EmpresasView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        empresas = User.objects.filter(user_type='empresa')
+        serializer = UserSerializer(empresas, many=True)
         return Response(serializer.data)

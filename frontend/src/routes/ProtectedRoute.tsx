@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 const ProtectedRoute = () => {
   const isAuthenticated = !!localStorage.getItem('access')
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />
+  return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />
 }
 
 export default ProtectedRoute

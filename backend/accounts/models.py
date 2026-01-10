@@ -9,12 +9,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('cliente', 'cliente'),
         ('empresa', 'empresa'),
     )
+    COMPANY_TYPE_CHOICE = (
+        ('ladrillera', 'ladrillera'),
+        ('constructora', 'constructora'),
+        ('ferreteria', 'ferreteria'),
+    )
 
     cedula_nit = models.BigIntegerField(primary_key=True, unique=True)
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20, blank=True)
     user_type = models.CharField(max_length=10, choices= USER_TYPE_CHOICE)
+    company_type = models.CharField(max_length=20, choices= COMPANY_TYPE_CHOICE, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)

@@ -19,6 +19,7 @@ class RegisterSerializer(ModelSerializer):
             'full_name',
             'phone',
             'user_type',
+            'company_type',
             'photo',
             'password'
         )
@@ -40,6 +41,7 @@ class UserSerializer(ModelSerializer):
             'full_name',
             'phone',
             'user_type',
+            'company_type',
             'photo',
         )
 
