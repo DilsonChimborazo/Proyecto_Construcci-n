@@ -15,6 +15,8 @@ class Product(models.Model):
     unidad_medida = models.CharField(max_length=30, choices=UNIT_MEASUREMENT)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
+    iva = models.DecimalField(max_digits=5, decimal_places=2, default=0)        
+    descuento = models.DecimalField(max_digits=5, decimal_places=2, default=0) 
 
     def __str__(self):
         return self.nombre

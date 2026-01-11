@@ -22,6 +22,7 @@ from accounts.api.views import EmpresasView
 from accounts.api.views import LoginView, MeView
 from Product.api.routers import routerProduct
 from Order.api.routers import routerOrder
+from detailOrder.api.routers import routerDetailOrder
 
 # Vistas ya creadas por simpleJWT
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
@@ -39,6 +40,7 @@ urlpatterns = [
     path("api/empresas/", EmpresasView.as_view(), name="empresas"),
     path("api/", include(routerProduct.urls)),
     path("api/", include(routerOrder.urls)),
+    path("api/", include(routerDetailOrder.urls)),
 
 ]
 
