@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
 import api from '../api/axios'
+import ClientMenu from '../components/menu/client/ClientMenu'
+import CompanyMenu from '../components/menu/company/CompanyMenu'
 
 
 
@@ -48,10 +50,6 @@ const toggleSidebar = () => {
 }
 
 
-
-
-
-
 return (
   <div className="flex min-h-screen bg-amber-700">
 
@@ -64,37 +62,8 @@ return (
     >
     <div className="p-4">
       <h2 className="font-bold text-lg mb-4">Menú</h2>
-
-      <ul className="space-y-2">
-        <li>
-          <NavLink
-            to="/dashboard"
-            end
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded transition
-              ${isActive
-                ? 'bg-white text-red-600 font-semibold'
-                : 'hover:bg-red-400'}`
-            }
-          >
-            Inicio
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink
-            to="/dashboard/sales"
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded transition
-              ${isActive
-                ? 'bg-white text-red-600 font-semibold'
-                : 'hover:bg-red-400'}`
-            }
-          >
-            Ventas
-          </NavLink>
-        </li>
-      </ul>
+        {me?.user_type === 'cliente' && <ClientMenu />}
+        {me?.user_type === 'empresa' && <CompanyMenu />}
     </div>
 
     </aside>
@@ -129,7 +98,6 @@ return (
 
       {/* BODY */}
       <div className="p-6">
-        dsfsghjgfdghjnmj
         <Outlet />
 
       </div>

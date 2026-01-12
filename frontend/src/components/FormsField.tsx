@@ -46,7 +46,7 @@ const FormField: React.FC<FormFieldProps> = ({
   )
 
   return (
-    <div className="w-full mb-4">
+    <div className="w-full  mb-4">
       {label && (
         <label className="block mb-2 font-bold text-white">
           {label}

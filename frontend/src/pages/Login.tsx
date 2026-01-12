@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import logoImg from '../assets/logo.png'
-import FormField from '../components/globales/FormsField'
+import FormField from '../components/FormsField'
 import { login } from '../services/auth.services'
 import type { LoginData } from '../types/auth.types'
 import Register from './Register'
@@ -11,6 +11,7 @@ import { FaGithub, FaFacebookF, FaGoogle } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import toast from 'react-hot-toast'
 import api from '../api/axios'
+import FormButton from '../components/FormButton'
 
 
 
@@ -35,6 +36,7 @@ const Login = () => {
   // Datos de usuario
     const res = await api.get('/me/')
     const user = res.data
+    
 
     toast.success(`Bienvenido, ${user.full_name}`)
       navigate('/dashboard', { replace: true })
@@ -200,7 +202,7 @@ const Login = () => {
         {mode === 'login' && (
           <form
             onSubmit={handleSubmitRHF(onSubmit)}
-            className="px-6 rounded-xl w-2/4 h-full"
+            className="px-6 rounded-xl w-3/4 h-full"
           >
             <h2 className="text-2xl font-bold mb-4 text-center">
               Iniciar sesión
@@ -226,13 +228,10 @@ const Login = () => {
               error={errors.password?.message}
             />
             <div className='text-center'>
-              <button
-                type="submit"
-                className="w-full bg-blue-700 text-white text-center py-2 rounded hover:bg-blue-800"
-                disabled={mutation.isPending}
-              >
-                {mutation.isPending ? 'Ingresando...' : 'Login'}
-              </button>
+            <FormButton
+              text={mutation.isPending ? 'Ingresando...' : 'Login'}
+              loading={mutation.isPending}
+            />
             </div>
             <div className="flex items-center my-6">
               <div className="flex-1 h-px bg-gray-300"></div>

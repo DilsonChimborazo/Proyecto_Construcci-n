@@ -4,7 +4,7 @@ import Register from './pages/Register'
 import DashboardLayout from './pages/DashboardLayout'
 import ProtectedRoute from './routes/ProtectedRoute'
 import DashboardHome from './pages/DashboardHome'
-import DashboardSales from './pages/DashboardSales'
+import DashboardSales from './pages/company/DashboardSales'
 
 
 const App = () => {

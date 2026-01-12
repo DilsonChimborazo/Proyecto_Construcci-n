@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { register as registerUser } from '../services/auth.services'
 import type { RegisterData } from '../types/auth.types'
-import FormField from '../components/globales/FormsField.tsx'
+import FormField from '../components/FormsField.tsx'
 
 
 const Register = () => {
