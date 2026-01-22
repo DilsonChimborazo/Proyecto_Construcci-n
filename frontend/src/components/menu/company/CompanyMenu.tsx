@@ -9,13 +9,13 @@ const CompanyMenu = () => {
         </Link>
       </li>
       <li>
-        <Link to="/productos" className="hover:text-blue-400">
+        <Link to="/dashboard/productos" className="hover:text-blue-400">
           Productos
         </Link>
       </li>
       <li>
-        <Link to="/pedidos" className="hover:text-blue-400">
-          Pedidos
+        <Link to="/ventas" className="hover:text-blue-400">
+          Ventas
         </Link>
       </li>
       <li>

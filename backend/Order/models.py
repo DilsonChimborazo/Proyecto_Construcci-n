@@ -19,7 +19,8 @@ class Order(models.Model):
         limit_choices_to={'user_type': 'cliente'}
     )
 
-    fecha_pedido = models.DateField(auto_now_add=True)
+    fecha_venta = models.DateField(auto_now_add=True)
+    fecha_pedido = models.DateField(null=True, blank=True)
     estado = models.CharField(max_length=30, choices=STATE, default='solicitado')
     direccion = models.CharField(max_length=50)
 

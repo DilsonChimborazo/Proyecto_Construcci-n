@@ -18,7 +18,7 @@ class RegisterViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
-    http_method_names = ["post","get"]
+    http_method_names = ["post","get","patch"]
 
 class MeView(APIView):
     permission_classes = [IsAuthenticated]

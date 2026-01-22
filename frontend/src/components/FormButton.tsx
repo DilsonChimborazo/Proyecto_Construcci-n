@@ -1,10 +1,11 @@
 import clsx from 'clsx'
 
 interface FormButtonProps {
-  text: string
+  text: React.ReactNode
   type?: 'button' | 'submit'
   loading?: boolean
   className?: string
+  onClick?: () => void
 }
 
 const FormButton: React.FC<FormButtonProps> = ({
@@ -12,14 +13,16 @@ const FormButton: React.FC<FormButtonProps> = ({
   type = 'submit',
   loading = false,
   className,
+  onClick,
 }) => {
   return (
     <button
       type={type}
+      onClick={onClick}
       disabled={loading}
       className={clsx(
         `
-        w-full py-2 rounded-md font-bold
+        p-2 rounded-md font-bol d
         bg-orange-400 hover:bg-orange-500
         text-white transition
         disabled:opacity-50

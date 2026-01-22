@@ -4,7 +4,8 @@ import Register from './pages/Register'
 import DashboardLayout from './pages/DashboardLayout'
 import ProtectedRoute from './routes/ProtectedRoute'
 import DashboardHome from './pages/DashboardHome'
-import DashboardSales from './pages/company/DashboardSales'
+import DashboardSales from './pages/company/DashboardProduct'
+import DashboardGetProduct from './pages/company/DashboardGetProduct'
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardHome />} />
             <Route path="sales" element={<DashboardSales />} />
+            <Route path="productos" element={<DashboardGetProduct/>} />
           </Route>
 
         </Route>

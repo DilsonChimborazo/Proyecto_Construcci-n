@@ -15,8 +15,13 @@ const ClientMenu = () => {
         </Link>
       </li>
       <li>
-        <Link to="/perfil" className="hover:text-blue-400">
-          Mi perfil
+        <Link to="/Favoritos" className="hover:text-blue-400">
+          Favoritos
+        </Link>
+      </li>
+      <li>
+        <Link to="/Empresas" className="hover:text-blue-400">
+          Empresas
         </Link>
       </li>
     </ul>
