@@ -17,6 +17,7 @@ class Product(models.Model):
     stock = models.PositiveIntegerField()
     iva = models.DecimalField(max_digits=5, decimal_places=2, default=0)        
     descuento = models.DecimalField(max_digits=5, decimal_places=2, default=0) 
+    photo_prod = models.ImageField(upload_to='productos/', null=True,blank=True)
 
     def __str__(self):
         return self.nombre

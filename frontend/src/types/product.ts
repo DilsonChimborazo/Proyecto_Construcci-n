@@ -1,11 +1,13 @@
-export interface Product{
-    id: number
-    empresa: number
-    nombre: string
-    descripcion: string
-    unidad_medida: string
-    precio: number
-    stock: number
-    iva: number
-    descuento: number
+export interface Product {
+  id: number
+  nombre: string
+  descripcion: string
+  unidad_medida: string
+  precio: string
+  stock: number
+  iva: string
+  descuento: string
+  photo_prod: string | null
 }
+
+

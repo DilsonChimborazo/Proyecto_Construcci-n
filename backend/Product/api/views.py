@@ -24,3 +24,9 @@ class ProductViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(empresa=self.request.user)
+    
+    def create(self, request, *args, **kwargs):
+        print('DATA:', request.data)
+        print('FILES:', request.FILES)
+        return super().create(request, *args, **kwargs)
+

@@ -28,11 +28,9 @@ from detailOrder.api.routers import routerDetailOrder
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
 
 urlpatterns = [
-    # Devuelve token y refreh token
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-
-    # Renovar token
-    path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
     
     path("api/login/", LoginView.as_view(), name="login"),
     path('api/me/', MeView.as_view(), name='me'),
@@ -47,5 +45,5 @@ urlpatterns = [
 #Esto permite ver las imagenes en el navegador
 urlpatterns += static(
     settings.MEDIA_URL,
-    documen_root=settings.MEDIA_ROOT
+    document_root=settings.MEDIA_ROOT
 )
