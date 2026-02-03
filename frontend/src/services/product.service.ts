@@ -13,3 +13,8 @@ export const createProduct = async (formData: FormData) => {
   })
   return data
 }
+
+export const getProductsId = async (id: number) => {
+  const { data } = await api.get(`/productos/${id}/`)
+  return data
+} 

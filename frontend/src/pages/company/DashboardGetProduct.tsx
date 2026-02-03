@@ -4,16 +4,43 @@ import { getProducts } from '../../services/product.service'
 import FormButton from '../../components/FormButton'
 import Modal from '../../components/Modal'
 import DashboardProduct from './DashboardProduct'
+import ProductDetailModal from './ProductDetailModal'
 import { Plus } from 'lucide-react'
 import type { Product } from '../../types/product'
 
 const ProductsGet = () => {
   const [openModal, setOpenModal] = useState(false)
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null)
+  const [mode, setMode] = useState<'create' | 'view' | 'edit'>('create')
 
   const { data: products, isLoading } = useQuery<Product[]>({
     queryKey: ['products'],
     queryFn: getProducts,
   })
+
+  // ---------- CONTROL MODAL ----------
+  const closeModal = () => {
+    setOpenModal(false)
+    setSelectedProductId(null)
+  }
+
+  const openCreateModal = () => {
+    setMode('create')
+    setSelectedProductId(null)
+    setOpenModal(true)
+  }
+
+  const openEditModal = (id: number) => {
+    setMode('edit')
+    setSelectedProductId(id)
+    setOpenModal(true)
+  }
+
+  const openViewModal = (id: number) => {
+    setMode('view')
+    setSelectedProductId(id)
+    setOpenModal(true)
+  }
 
   return (
     <div className="bg-white p-6 rounded shadow">
@@ -23,7 +50,7 @@ const ProductsGet = () => {
 
         <FormButton
           type="button"
-          onClick={() => setOpenModal(true)}
+          onClick={openCreateModal}
           text={
             <span className="flex items-center gap-2">
               <Plus size={20} strokeWidth={4} />
@@ -36,10 +63,24 @@ const ProductsGet = () => {
       {/* MODAL */}
       <Modal
         isOpen={openModal}
-        onClose={() => setOpenModal(false)}
-        title="Crear producto"
+        onClose={closeModal}
+        title={
+          mode === 'create'
+            ? 'Crear producto'
+            : mode === 'edit'
+            ? 'Editar producto'
+            : 'Detalle del producto'
+        }
       >
-        <DashboardProduct />
+        {mode === 'create' && <DashboardProduct />}
+
+        {mode !== 'create' && selectedProductId && (
+          <ProductDetailModal
+            productId={selectedProductId}
+            mode={mode}
+            onClose={closeModal}
+          />
+        )}
       </Modal>
 
       {/* ESTADOS */}
@@ -73,9 +114,7 @@ const ProductsGet = () => {
               </div>
 
               {/* INFO */}
-              <h3 className="font-semibold text-lg">
-                {product.nombre}
-              </h3>
+              <h3 className="font-semibold text-lg">{product.nombre}</h3>
 
               <p className="text-orange-500 font-bold text-xl">
                 ${product.precio}
@@ -99,11 +138,17 @@ const ProductsGet = () => {
 
               {/* ACCIONES */}
               <div className="mt-4 flex gap-2">
-                <button className="flex-1 bg-gray-200 hover:bg-gray-300 text-sm py-2 rounded">
+                <button
+                  onClick={() => openEditModal(product.id)}
+                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-sm py-2 rounded"
+                >
                   Editar
                 </button>
 
-                <button className="flex-1 bg-orange-400 hover:bg-orange-500 text-white text-sm py-2 rounded">
+                <button
+                  onClick={() => openViewModal(product.id)}
+                  className="flex-1 bg-orange-400 hover:bg-orange-500 text-white text-sm py-2 rounded"
+                >
                   Ver
                 </button>
               </div>

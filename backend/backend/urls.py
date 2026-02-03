@@ -23,6 +23,7 @@ from accounts.api.views import LoginView, MeView
 from Product.api.routers import routerProduct
 from Order.api.routers import routerOrder
 from detailOrder.api.routers import routerDetailOrder
+from calificacion.api.routers import routercalificacion
 
 # Vistas ya creadas por simpleJWT
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
@@ -39,6 +40,7 @@ urlpatterns = [
     path("api/", include(routerProduct.urls)),
     path("api/", include(routerOrder.urls)),
     path("api/", include(routerDetailOrder.urls)),
+    path("api/", include(routercalificacion.urls)),
 
 ]
 

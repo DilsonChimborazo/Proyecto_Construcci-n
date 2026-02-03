@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import React from 'react'
 
 interface ModalProps {
   isOpen: boolean
@@ -19,22 +20,17 @@ const Modal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Overlay */}
       <div
         className="absolute inset-0 bg-black/50"
+        onClick={onClose}
       />
 
-      {/* Modal box */}
       <div
         className={clsx(
-          `
-          relative bg-white rounded-lg shadow-lg
-          w-full max-w-lg p-6 z-50
-          `,
+          'relative bg-white rounded-lg shadow-lg w-full max-w-lg p-6 z-50',
           className
         )}
       >
-        {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-bold">{title}</h3>
           <button
@@ -45,7 +41,6 @@ const Modal = ({
           </button>
         </div>
 
-        {/* Content */}
         {children}
       </div>
     </div>
