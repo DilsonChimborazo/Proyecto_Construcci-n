@@ -18,3 +18,11 @@ export const getProductsId = async (id: number) => {
   const { data } = await api.get(`/productos/${id}/`)
   return data
 } 
+
+export const updateProduct = async (
+  id: number,
+  data: { nombre: string; precio: number; stock: number }
+) => {
+  const response = await api.patch(`/productos/${id}/`, data)
+  return response.data
+}

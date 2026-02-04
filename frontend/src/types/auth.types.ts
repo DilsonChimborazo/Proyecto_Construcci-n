@@ -3,7 +3,8 @@ export interface LoginData {
   password: string
 }
 
-export type UserType = 'cliente' | 'empresa'
+export type UserType = 'CLIENTE' | 'EMPRESA' 
+
 
 export interface RegisterData {
   cedula_nit: number

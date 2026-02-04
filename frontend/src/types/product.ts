@@ -3,11 +3,12 @@ export interface Product {
   nombre: string
   descripcion: string
   unidad_medida: string
-  precio: string
+  precio: number
   stock: number
   iva: string
   descuento: string
   photo_prod: string | null
+  calificacion_promedio?: number
 }
 
 
