@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
+import { Plus } from 'lucide-react'
+import { rateProduct } from '../../services/rating.service'
+import Rating from '../Rating'
 import { getProducts } from '../../services/product.service'
 import FormButton from '../../components/FormButton'
 import Modal from '../../components/Modal'
 import DashboardProduct from './DashboardProduct'
 import ProductDetailModal from './ProductDetailModal'
-import { Plus } from 'lucide-react'
 import type { Product } from '../../types/product'
 
 const ProductsGet = () => {
@@ -13,12 +16,33 @@ const ProductsGet = () => {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null)
   const [mode, setMode] = useState<'create' | 'view' | 'edit'>('create')
 
+  const queryClient = useQueryClient()
+
+  // ================== QUERY PRODUCTOS ==================
   const { data: products, isLoading } = useQuery<Product[]>({
     queryKey: ['products'],
     queryFn: getProducts,
   })
 
-  // ---------- CONTROL MODAL ----------
+  // ================== MUTATION CALIFICAR ==================
+  const rateMutation = useMutation({
+    mutationFn: ({
+      productId,
+      value,
+    }: {
+      productId: number
+      value: number
+    }) => rateProduct(productId, value),
+    onSuccess: () => {
+      toast.success('Calificación guardada')
+      queryClient.invalidateQueries({ queryKey: ['products'] })
+    },
+    onError: () => {
+      toast.error('Error al guardar calificación')
+    },
+  })
+
+  // ================== CONTROL MODAL ==================
   const closeModal = () => {
     setOpenModal(false)
     setSelectedProductId(null)
@@ -60,7 +84,7 @@ const ProductsGet = () => {
         />
       </div>
 
-      {/* MODAL */}
+      {/* MODAL GLOBAL */}
       <Modal
         isOpen={openModal}
         onClose={closeModal}
@@ -134,6 +158,26 @@ const ProductsGet = () => {
 
               <div className="text-xs text-gray-400 mt-1">
                 IVA {product.iva}% · Desc {product.descuento}%
+              </div>
+
+              {/* CALIFICACIÓN */}
+              <div className="mt-2">
+                <Rating
+                  value={product.calificacion_promedio ?? 0}
+                  readonly={product.calificacion_promedio !== null}
+                  onChange={(value) =>
+                    rateMutation.mutate({
+                      productId: product.id,
+                      value,
+                    })
+                  }
+                />
+
+                <p className="text-xs text-gray-400 mt-1">
+                  {product.calificacion_promedio
+                    ? `Calificación: ${product.calificacion_promedio} / 5`
+                    : 'Califica este producto'}
+                </p>
               </div>
 
               {/* ACCIONES */}

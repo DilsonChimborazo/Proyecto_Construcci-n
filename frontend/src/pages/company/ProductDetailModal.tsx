@@ -7,6 +7,7 @@ import type { Product } from '../../types/product'
 import FormField from '../../components/FormsField'
 import FormButton from '../../components/FormButton'
 
+
 // ===== Tipos =====
 type ProductForm = Omit<Product, 'id'> & {
   photo_prod?: FileList
@@ -63,8 +64,6 @@ const ProductDetailModal = ({ productId, mode, onClose }: Props) => {
     })
   } }, [product, reset])
 
-
-  // ===== Submit =====
   const onSubmit = (data: ProductForm) => {
     const formData = new FormData()
 
@@ -90,6 +89,13 @@ const ProductDetailModal = ({ productId, mode, onClose }: Props) => {
   if (mode === 'view') {
     return (
       <div className="space-y-2">
+        {product.photo_prod ?(
+          <img src={product.photo_prod} alt="Foto del producto" className="w-full h-48 object-cover rounded" />
+        ) : (
+          <div className="w-full h-48 bg-gray-200 flex items-center justify-center rounded">
+            <span className="text-gray-500">Sin imagen</span>
+          </div>
+        )}
         <h2 className="text-xl font-bold">{product.nombre}</h2>
         <p>Precio: ${product.precio}</p>
         <p>Stock: {product.stock}</p>
